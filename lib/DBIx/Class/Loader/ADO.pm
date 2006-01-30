@@ -5,7 +5,7 @@ use base qw( DBIx::Class::Loader::Generic );
 use DBI;
 use Carp;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -92,7 +92,7 @@ sub _table_info {
         push @pri, $row->[ 3 ];
     }
 
-    $self->_croak("$table has no primary key") unless @pri;
+    croak("$table has no primary key") unless @pri;
 
     return( \@cols, \@pri );
 }
@@ -117,7 +117,7 @@ sub _table_info {
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2005 by Brian Cassidy
+Copyright 2006 by Brian Cassidy
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 

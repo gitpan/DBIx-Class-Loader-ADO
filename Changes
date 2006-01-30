@@ -1,4 +1,7 @@
 Revision history for Perl extension DBIx::Class::Loader::ADO.
 
+0.02  Mon Jan 30 2006
+	- fixed to work with latest DBIx::Class::Loader
+
 0.01  Wed Oct 12 2005
 	- original version

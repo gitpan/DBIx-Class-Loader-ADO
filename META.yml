@@ -1,6 +1,6 @@
 ---
 name: DBIx-Class-Loader-ADO
-version: 0.01
+version: 0.02
 author:
   - Brian Cassidy <bricas@cpan.org>
 abstract: DBIx::Class::Loader ADO Implementation.
@@ -13,5 +13,5 @@ build_requires:
 provides:
   DBIx::Class::Loader::ADO:
     file: lib/DBIx/Class/Loader/ADO.pm
-    version: 0.01
+    version: 0.02
 generated_by: Module::Build version 0.2611
