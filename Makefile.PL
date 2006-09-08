@@ -2,14 +2,15 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
+          'PL_FILES' => {},
+          'INSTALLDIRS' => 'site',
           'NAME' => 'DBIx::Class::Loader::ADO',
+          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/DBIx/Class/Loader/ADO.pm',
           'PREREQ_PM' => {
-                           'DBD::ADO' => '0',
-                           'DBIx::Class::Loader' => '0',
-                           'Test::More' => '0'
-                         },
-          'INSTALLDIRS' => 'site',
-          'PL_FILES' => {}
+                           'Test::More' => 0,
+                           'DBIx::Class::Loader' => '0.21',
+                           'DBD::ADO' => 0
+                         }
         )
 ;

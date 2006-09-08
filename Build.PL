@@ -9,7 +9,7 @@ my $build = Module::Build->new(
 	create_readme      => 1,
 	create_makefile_pl => 'traditional',
 	requires           => {
-		'DBIx::Class::Loader' => 0,
+		'DBIx::Class::Loader' => '0.21',
 		'DBD::ADO'            => 0
 	},
 	build_requires     => {

@@ -2,10 +2,10 @@ package DBIx::Class::Loader::ADO;
 
 use strict;
 use base qw( DBIx::Class::Loader::Generic );
-use DBI;
+
 use Carp;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 NAME
 
@@ -13,15 +13,15 @@ DBIx::Class::Loader::ADO - DBIx::Class::Loader ADO Implementation.
 
 =head1 SYNOPSIS
 
-	use DBIx::Class::Loader;
+    use DBIx::Class::Loader;
 
-	# $loader is a DBIx::Class::Loader::ADO
-	my $loader = DBIx::Class::Loader->new(
-		dsn       => "dbi:ADO:$DSN",
-		namespace => "Data",
-	);
-	my $class = $loader->find_class('film'); # $class => Data::Film
-	my $obj = $class->retrieve(1);
+    # $loader is a DBIx::Class::Loader::ADO
+    my $loader = DBIx::Class::Loader->new(
+        dsn       => "dbi:ADO:$DSN",
+        namespace => "Data",
+    );
+    my $class = $loader->find_class('film'); # $class => Data::Film
+    my $obj = $class->retrieve(1);
 
 =head1 DESCRIPTION
 
@@ -31,22 +31,22 @@ See L<DBIx::Class::Loader>.
 
 To install this module via Module::Build:
 
-	perl Build.PL
-	./Build         # or `perl Build`
-	./Build test    # or `perl Build test`
-	./Build install # or `perl Build install`
+    perl Build.PL
+    ./Build         # or `perl Build`
+    ./Build test    # or `perl Build test`
+    ./Build install # or `perl Build install`
 
 To install this module via ExtUtils::MakeMaker:
 
-	perl Makefile.PL
-	make
-	make test
-	make install
+    perl Makefile.PL
+    make
+    make test
+    make install
 
 =cut
 
 sub _db_classes{
-	return qw( DBIx::Class::PK::Auto::MSSQL );
+    return qw( DBIx::Class::PK::Auto::MSSQL );
 }
 
 sub _relationships {
@@ -58,7 +58,7 @@ sub _relationships {
     # needs testing and a way to detect relationships
     # other than one to many
     while ( my $row = $sth->fetch ) {
-        my( @args ) = ( $row->[ 6 ], $row->[ 7 ], $row->[ 2 ] );
+        my( @args ) = ( lc $row->[ 2 ], $row->[ 3 ], lc $row->[ 6 ], $row->[ 7 ] );
         eval { $self->_belongs_to_many( @args ) };
         warn qq/\# belongs_to_many failed "$@"\n\n/ if $@ && $self->debug;
     }
@@ -66,7 +66,7 @@ sub _relationships {
 
 sub _tables {
     my $self = shift;
-    my $dbh  = DBI->connect( @{ $self->{_datasource} } ) or croak( $DBI::errstr );
+    my $dbh  = $self->{ storage }->dbh;
     my $sth  = $dbh->table_info( undef, undef, undef, "TABLE" );
 
     my @tables;
@@ -79,7 +79,7 @@ sub _tables {
 
 sub _table_info {
     my( $self, $table ) = @_;
-    my $dbh = DBI->connect( @{ $self->{_datasource} } ) or croak( $DBI::errstr );
+    my $dbh = $self->{ storage }->dbh;
     my $sth = $dbh->column_info( undef, undef, $table, undef );
 
     my( @cols, @pri );
