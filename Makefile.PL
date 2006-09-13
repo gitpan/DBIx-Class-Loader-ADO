@@ -10,7 +10,8 @@ WriteMakefile
           'PREREQ_PM' => {
                            'Test::More' => 0,
                            'DBIx::Class::Loader' => '0.21',
-                           'DBD::ADO' => 0
+                           'DBD::ADO' => 0,
+                           'DBIx::Class' => '0.07002'
                          }
         )
 ;

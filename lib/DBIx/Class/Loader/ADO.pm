@@ -5,7 +5,7 @@ use base qw( DBIx::Class::Loader::Generic );
 
 use Carp;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 NAME
 
@@ -44,6 +44,15 @@ To install this module via ExtUtils::MakeMaker:
     make install
 
 =cut
+
+sub _load_classes {
+    my $self    = shift; 
+    my $dbclass = $self->SUPER::_load_classes; 
+
+    $_->column_info_from_storage( 0 ) for $self->classes;
+
+    return $db_class;
+}
 
 sub _db_classes{
     return qw( DBIx::Class::PK::Auto::MSSQL );

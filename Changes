@@ -1,5 +1,8 @@
 Revision history for Perl extension DBIx::Class::Loader::ADO.
 
+0.04  Wed Sep 13 2006
+    - fix for column_info_for() issues; requires DBIx::Class 0.07002
+
 0.03  Fri Sep 08 2006
     - more fixes for the latest loader
 
