@@ -62,7 +62,7 @@ SQL
         user          => $user,
         password      => $password,
         namespace     => 'ADOTest',
-	relationships => 1,
+        relationships => 1,
         constraint    => '^loader_test.+',
     );
     is( $loader->find_class("loader_test1"), "ADOTest::LoaderTest1" );

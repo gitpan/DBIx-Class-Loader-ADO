@@ -6,5 +6,3 @@ META.yml
 t/01ado.t
 t/02pod.t
 t/03podcoverage.t
-Makefile.PL
-README
